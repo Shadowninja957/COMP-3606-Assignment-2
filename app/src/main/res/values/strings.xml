@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Product Management</string>
+    <string-array name="options">
+        <item>Receiving Stocks</item>
+        <item>Ordering Stocks</item>
+    </string-array>
 </resources>
