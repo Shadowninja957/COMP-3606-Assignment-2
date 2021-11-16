@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> listView, View itemView, int position, long id) {
                 if (position == 0){
                     Intent intent = new Intent(MainActivity.this,
-                            OrderingStocksActivity.class);
+                            ReceivingStocksActivity.class);
                     startActivity(intent);
                 }
                 else if (position == 1){
                     Intent intent = new Intent(MainActivity.this,
-                            ReceivingStocksActivity.class);
+                            OrderingStocksActivity.class);
                     startActivity(intent);
                 }
             }
