@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,18 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
         root = inflater.inflate(R.layout.fragment_order_stock, container, false);
         Button makeOrderButton = (Button) root.findViewById(R.id.make_order_button);
         makeOrderButton.setOnClickListener(this);
+
+        View fragmentContainer = root.findViewById(R.id.fragment_View2output);
+        if (fragmentContainer!=null) {
+
+            OutputViewFragment outputView = new OutputViewFragment();
+            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.fragment_View2output, outputView);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.commit();
+
+        }
 
         SQLiteOpenHelper productDatabaseHelper = new ProductDatabaseHelper(inflater.getContext());
         try {
@@ -123,6 +136,18 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view){
         onMakeOrder();
+
+        View fragmentContainer = root.findViewById(R.id.fragment_View2output);
+        if (fragmentContainer!=null) {
+
+            OutputViewFragment outputView = new OutputViewFragment();
+            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_View2output, outputView);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.commit();
+
+        }
     }
 
     private void onMakeOrder(){
@@ -130,19 +155,16 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
         Spinner spinner = root.findViewById(R.id.order_stock_spinner);
         int productId = (int) spinner.getSelectedItemId();
         new MakeOrderTask().execute(productId);
-        /*Toast toast = Toast.makeText(root.getContext(),
-                "CLICK WORKS!", Toast.LENGTH_SHORT);
-        toast.show();*/
     }
 
     private class MakeOrderTask extends AsyncTask<Integer, Void, Boolean> {
         private ContentValues productItem;
+        private int quantity;
 
         protected void onPreExecute() {
             EditText editText = root.findViewById(R.id.order_quantity_editText);
-            String quantity = editText.getText().toString();
+            quantity = Integer.parseInt(editText.getText().toString());
             productItem = new ContentValues();
-            productItem.put("STOCK_IN_TRANSIT", quantity);
         }
 
         protected Boolean doInBackground(Integer... products) {
@@ -151,8 +173,22 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
                     new ProductDatabaseHelper(root.getContext());
             try {
                 SQLiteDatabase db = productDatabaseHelper.getWritableDatabase();
+
+                Cursor cursor = db.query("PRODUCT", new String[]{"NAME", "STOCK_IN_TRANSIT"},
+                        "_id = ?", new String[] {Integer.toString(productId + 1)},
+                        null, null, null);
+
+                int stockInTransit = 0;
+
+                if (cursor.moveToFirst()){
+                    stockInTransit = cursor.getInt(1);
+                    quantity += stockInTransit;
+                    productItem.put("STOCK_IN_TRANSIT", quantity);
+                }
+
+
                 db.update("PRODUCT", productItem,
-                        "_id = ?", new String[] {Integer.toString(1)});
+                        "_id = ?", new String[] {Integer.toString(productId + 1)});
                 db.close();
                 return true;
             } catch(SQLiteException e) {
