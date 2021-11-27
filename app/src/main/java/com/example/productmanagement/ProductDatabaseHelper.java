@@ -63,9 +63,9 @@ class ProductDatabaseHelper extends SQLiteOpenHelper {
                     19.99, 800, 15.99);
         }
 
-        /*if (oldVersion < 2){
-            // updates the stock quantities
-        }*/
+        if (oldVersion < 2){
+            db.execSQL("ALTER TABLE PRODUCT ADD COLUMN DIRTY BIT default 'FALSE'");
+        }
 
     }
 }

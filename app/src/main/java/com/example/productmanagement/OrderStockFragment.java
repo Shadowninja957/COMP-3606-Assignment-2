@@ -184,6 +184,7 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
                     stockInTransit = cursor.getInt(1);
                     quantity += stockInTransit;
                     productItem.put("STOCK_IN_TRANSIT", quantity);
+                    productItem.put("DIRTY", true);
                 }
 
 

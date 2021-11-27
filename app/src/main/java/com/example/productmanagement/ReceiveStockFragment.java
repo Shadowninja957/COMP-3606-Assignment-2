@@ -155,6 +155,7 @@ public class ReceiveStockFragment extends Fragment implements View.OnClickListen
 
                     productItem.put("STOCK_ON_HAND", stockOnHand);
                     productItem.put("STOCK_IN_TRANSIT", stockInTransit);
+                    productItem.put("DIRTY", true);
 
                 }
 

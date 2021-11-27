@@ -6,6 +6,7 @@
         <item>Receiving Stocks</item>
         <item>Ordering Stocks</item>
     </string-array>
+    <string name="on_sync">Sync</string>
 
     <!-- Ordering Stocks Activity -->
     <string name="make_order">Make Order</string>
