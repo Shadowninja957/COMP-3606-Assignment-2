@@ -60,6 +60,8 @@ public class OutputViewFragment extends Fragment {
                         price = cursor.getDouble(3);
                         valuation = price * cursor.getDouble(1);
                         in_Transit_Valuation = price * cursor.getDouble(2);
+                        valuation = Math.round(valuation * 100.0) / 100.0;
+                        in_Transit_Valuation = Math.round(in_Transit_Valuation * 100.0) / 100.0;
 
                         detailsFormatted.append("Product Name: ").append(cursor.getString(0)).append('\n');
                         detailsFormatted.append("Stock On Hand: ").append(cursor.getString(1)).append('\n');

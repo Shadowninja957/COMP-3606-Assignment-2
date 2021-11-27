@@ -174,16 +174,20 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
             try {
                 SQLiteDatabase db = productDatabaseHelper.getWritableDatabase();
 
-                Cursor cursor = db.query("PRODUCT", new String[]{"NAME", "STOCK_IN_TRANSIT"},
+                Cursor cursor = db.query("PRODUCT", new String[]{"NAME", "STOCK_IN_TRANSIT",
+                                "REORDER_QUANTITY"},
                         "_id = ?", new String[] {Integer.toString(productId + 1)},
                         null, null, null);
 
                 int stockInTransit = 0;
+                int reorder_quantity = 0;
 
                 if (cursor.moveToFirst()){
                     stockInTransit = cursor.getInt(1);
-                    quantity += stockInTransit;
-                    productItem.put("STOCK_IN_TRANSIT", quantity);
+                    reorder_quantity = cursor.getInt(2);
+                    reorder_quantity *= quantity;
+                    reorder_quantity += stockInTransit;
+                    productItem.put("STOCK_IN_TRANSIT", reorder_quantity);
                     productItem.put("DIRTY", true);
                 }
 
