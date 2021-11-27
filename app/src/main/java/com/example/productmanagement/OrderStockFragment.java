@@ -34,6 +34,12 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
         // Required empty public constructor
     }
 
+ /*       interface Listener {
+        void itemClicked();
+    };
+    private Listener listener;*/
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -136,7 +142,6 @@ public class OrderStockFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view){
         onMakeOrder();
-
         View fragmentContainer = root.findViewById(R.id.fragment_View2output);
         if (fragmentContainer!=null) {
 

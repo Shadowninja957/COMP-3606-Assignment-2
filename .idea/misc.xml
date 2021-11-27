@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dhari/AndroidStudioProjects/ProductManagement/app/src/main/res/layout-large/activity_main.xml" value="0.190625" />
+        <entry key="..\:/Users/dhari/AndroidStudioProjects/ProductManagement/app/src/main/res/layout-large/activity_ordering_stocks.xml" value="0.190625" />
+        <entry key="..\:/Users/dhari/AndroidStudioProjects/ProductManagement/app/src/main/res/layout-large/activity_receiving_stocks.xml" value="0.190625" />
         <entry key="..\:/Users/dhari/AndroidStudioProjects/ProductManagement/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/dhari/AndroidStudioProjects/ProductManagement/app/src/main/res/layout/activity_ordering_stocks.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/dhari/AndroidStudioProjects/ProductManagement/app/src/main/res/layout/activity_receiving_stocks.xml" value="0.25416666666666665" />
